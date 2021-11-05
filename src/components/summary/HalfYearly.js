@@ -186,7 +186,7 @@ const HalfYearly = () => {
                                 </div>
                                 <div>
                                 <BarChart
-                                    width={600}
+                                    width={400}
                                     height={300} data={dataPercentage} >
                                     <CartesianGrid strokeDasharray="3 3" />
                                     <XAxis interval={0} />

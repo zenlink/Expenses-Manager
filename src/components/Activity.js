@@ -25,13 +25,13 @@ const Activity = () => {
             <ul className="list">
                 {state.expenses && state.expenses.length > 0 ?
                     <li className="item actTitle">
-                        <span>date</span><span>exp.</span><span>payee</span><span>cat.</span><span>des.</span>
+                        <span>date</span><span>exp.</span><span>payee</span><span>cat.</span><span>des.</span><span>act.</span>
                     </li>
                     : <div className="noActivity">No Activity</div>}
                 {state.expenses && state.expenses.map((expense, index) => {
                     return (
                             <li className='item' key={index}>
-                                <div>{expense.selectedDate.toLocaleString()}</div>
+                                <div>{expense.selectedDate.toLocaleString().substring(0,10)}</div>
                                 <div >${expense.amount}</div>
                                 <div>{expense.payee}</div>
                                 <div>{expense.category}</div>

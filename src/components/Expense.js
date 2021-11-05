@@ -121,7 +121,7 @@ const Expense = () => {
         }
     }
     return (
-        <div>
+        <div className ="expenseContainer">
             <form className="form-center" onSubmit={handleSubmit}>
 
                 <div className="form-group">

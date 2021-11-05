@@ -80,7 +80,6 @@ const Weekly = () => {
         let summary = {};
         state.expenses.map((x) => {
             let dt = new Date(x.selectedDate)
-            console.log(dt)
             dt.setHours(0, 0, 0, 0)
             if (dt >= minDate && dt <= maxDate) {
                 t += parseFloat(x.amount);
@@ -174,7 +173,7 @@ const Weekly = () => {
                                 </div>
                                 <div>
                                     <BarChart
-                                        width={600}
+                                        width={400}
                                         height={300} data={dataPercentage} >
                                         <CartesianGrid strokeDasharray="3 3" />
                                         <XAxis interval={0} />

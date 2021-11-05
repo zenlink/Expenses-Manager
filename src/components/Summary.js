@@ -46,11 +46,11 @@ const Summary = () => {
     return (
         <div>
             <div className="navTimeHead">
-                <button onClick={handleTimeNav} className="button">
+                {/* <button onClick={handleTimeNav} className="button">
                 {isOpen ?  <FaAlignRight className="navIcon" />:<MdClose className="navIcon" /> }
-                </button>
+                </button> */}
 
-                <ul className= {isOpen? "timeContainer": "timeContainer showNavTime" }>
+                <ul className= "timeContainer">
                     {categorySummary.map((item, index) => {
                         return (
                             <>
@@ -61,7 +61,7 @@ const Summary = () => {
                                 }}
                                     className={currentIndex === index ? "timeLabel currentLabel" : "timeLabel"}
                                     key={index}>
-                                    <div>{item[0]}</div>
+                                    <div className ="singleItem">{item[0]}</div>
                                     {/* <div >{item[1]}</div> */}
 
                                 </li>

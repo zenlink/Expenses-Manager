@@ -22,7 +22,7 @@ const AppProvider = (props) => {
        currentComponentIndex: 0, 
        
         activeButton: 0,
-        navArr: ["expense", "activity", "summary", ],
+        navArr: ["expense-Manager", "activity", "summary", ],
         componentsArr: [<Expense />, <Activity />, <Summary />, ]
     });
     return (

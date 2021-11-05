@@ -11,97 +11,66 @@ body{
   font-family: "Roboto", Arial, Helvetica, sans-serif
 }
 .container{
+
   /* margin-top: 4.3rem; */
 }
 /* nav */
-.nav{
-  /* position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%; */
+
+.navHead{
   background: #139E91 ;
   color: white;
   font-size: 20px;
   text-transform: capitalize;
   box-shadow: 0 5px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   position: relative;
-}
-.navHead{
+  padding:1rem 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 .title{
   align-self: center; 
-  margin-left: 40px;
+  margin-left: 1rem;
   font-size: 1.8rem;
-  margin: 15px 0;
+  cursor:pointer;
+
 }
-.button{
-  border: 0;
-  outline: none;
-  font-weight: bold;
-  background: transparent;
-  cursor: pointer;
-  padding: 10px 40px;
-  font-size: 30px;
-}
+
 .navLinks{ 
-  position: absolute;
-  top: 66px;
-  right: 0;
-  width: 30%;
-  min-width: 120px;
-  background: rgba(19,158,145, 0.7);
-  z-index:1;
-  padding: 0.5rem 0;
-  list-style-type: none;
-  color: white;
-  transition: 0.3s ease-in;
-  display: none;
+  transition: 0.3s ease-in; 
+  display: flex;
  
 } 
-.showNav{
-  display: block;
-}
-.navIcon {
-  font-size: 1.7rem;
-  color: white;
-  
-}
-.nav li{
-  /* margin: 15px 0; */
-  cursor: pointer;
-  padding: 5px 40px;
-  text-align: center;
-}
-.nav li:hover{
-  text-decoration: underline;
+.singleItem{
+padding: 0 1rem;
+font-size: 1.4rem;
+cursor: pointer;
+align-self: center; 
 }
 .label{
   text-decoration: underline;
+  padding: 0 1rem;
+font-size: 1.4rem;
+cursor: pointer;
+align-self: center; 
 }
-@media screen and (min-width: 768px){
- 
-  .button{
-    display: none;
+@media screen and (max-width: 768px){
+  .navHead{
+    justify-content: space-between;
   }
-  .navContainer{
-    max-width: 1170px;
-    display: flex;
-    margin: 0 auto;
+  .title{
+    font-size: 1.2rem;
+   
   }
-  .navLinks{
-    position: static;
-    margin: 15px 0;
-    height: auto;
-    display: flex;
-    margin-left: 4rem;
-  }
-  
-  /* .navName{
-    margin: 0 1rem;
-    padding: 0.5rem 0;
-  } */
+  .singleItem{
+    padding: 0 .5rem;
+    font-size: 1rem;
+    }
+    .label{
+     
+      padding: 0 .5rem;
+    font-size: 1rem;
+    
+    }
 }
 /* end of nav */
 /* alert */
@@ -124,6 +93,12 @@ body{
 /* end of alert */
 
 /* expense */
+.expenseContainer{
+  height:90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .form-center{
   background: white;
   margin: 4rem auto;
@@ -177,7 +152,7 @@ body{
 }
 @media screen and (max-width: 768px){
   .form-center{
-    width: 500px;
+    width: 370px;
   }
 
 
@@ -213,7 +188,7 @@ body{
   /* display: flex;
   justify-content: space-between; */
   display: grid;
-  grid-template-columns: 25% 17% 18% 18% 16% 4% 5%;
+  grid-template-columns: 25% 17% 18% 18% 10% 6% 9%;
   transition: all 0.3s linear;
   border-radius: 2px;
 }
@@ -241,11 +216,19 @@ body{
     width: 100%;
     font-size: 13px;
   }
+  .list{
+    margin: 2rem 0 0 0;
+  }
+  .item{
+    padding: 10px 5px;
+  }
   .deleteButton{
     font-size: 16px;
+    text-align: left;
   }
   .editButton{
     font-size: 16px;
+    text-align: left;
   }
 }
 /* end of activity */
@@ -278,9 +261,13 @@ body{
 }
 @media screen and (max-width: 768px){
   .timeContainer li{
-    padding: 0.5rem 0;;
+    padding: 0.5rem 0;
   }
-  .timeContainer{
+ .singleItem{
+  padding:0 10px;
+  font-size: 16px;
+ }
+  /* .timeContainer{
     display: none;  
     position: absolute;
     left: 0;
@@ -288,12 +275,12 @@ body{
     min-width: 120px;
     background: rgba(151,151,151, 0.7);
     z-index:1; 
-  }
-  .showNavTime{
+  } */
+  /* .showNavTime{
     display: flex;
     flex-direction: column;
     align-items: center;   
-  }
+  } */
 }
 .currentSummary{
     background-color: F5F5F5;
@@ -366,6 +353,7 @@ body{
   .chartDivision{
     flex-direction: column;
     height: 700px;
+    /* display:block */
   }
 }
 @media screen and (max-width: 750px){
