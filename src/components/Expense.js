@@ -176,7 +176,7 @@ const Expense = () => {
                     </FormControl>
                 </div>
                 <div className="form-group">
-                    <FormControl className={classes.formControl}>
+                    <FormControl fullWidth className={classes.textField}>
                         <InputLabel id="demo-simple-select-label"
                         ><MdDescription></MdDescription>Category</InputLabel>
                         <Select
