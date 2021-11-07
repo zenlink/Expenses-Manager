@@ -34,7 +34,11 @@ body{
   cursor:pointer;
 
 }
-
+.githubicon{
+  vertical-align: middle;
+  padding-left: .6rem;
+  cursor:pointer
+}
 .navLinks{ 
   transition: 0.3s ease-in; 
   display: flex;
