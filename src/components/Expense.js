@@ -37,8 +37,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const initialExpenses = localStorage.getItem("spending") ?
-JSON.parse(localStorage.getItem("spending")) : [];
+// const initialExpenses = localStorage.getItem("spending") ?
+// JSON.parse(localStorage.getItem("spending")) : [];
 
 const Expense = () => {
     const [state, setState] = useContext(AppContext);
@@ -89,36 +89,37 @@ const Expense = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (amount > 0 && payee && category) {
-            // console.log(selectedDate)
-            // let currentDate = selectedDate.toLocaleDateString() + ' ' + selectedDate.toLocaleTimeString()
-
             let singleExpense = { id: uuidv4(), selectedDate, amount, payee, category, description };
+            let tempExpenses=[]
             if (state.index > -1) {
-                let tempExpenses = [...state.expenses];
+                tempExpenses = [...state.expenses];
                 tempExpenses[state.index] = singleExpense;
                 setState((s)=>{return{
                     ...s, expenses: tempExpenses, currentComponentIndex: 1, index: -1,
                     alert: { show: true, type: "success", text: "Item updated" }, activeButton: 1
                 }})
+               
             } else {
+                tempExpenses=[singleExpense,...state.expenses ]
                 setState((s) => {
                     return {
-                        ...s, expenses: [...s.expenses, singleExpense], currentComponentIndex: 1,
+                        ...s, expenses: tempExpenses, currentComponentIndex: 1,
                         alert: { show: true, type: "success", text: "Item added" }, activeButton: 1
                     }
                    
                 })
-
+               
             }
             setAmount("");
             setPayee("");
             setCategory("");
             setDescription("");
             setSelectedDate(new Date());
-
+            localStorage.setItem("spending", JSON.stringify(tempExpenses))
         } else {
             setState((s)=>{return { ...s, alert: { show: true, type: "danger", text: "Please fill in the Amount, Payee and select category!" } }})
         }
+       
     }
     return (
         <div className ="expenseContainer">

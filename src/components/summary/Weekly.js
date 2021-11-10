@@ -29,16 +29,16 @@ const useStyles = makeStyles(theme => ({
 
 const dayOffset = 86400000;
 
-const getWeekRange = (dateObject) => {
-    // Get weekday (0-6)
-    const dayOfWeek = dateObject.getDay();
-    // Offset with milliseconds * dow
-    let firstDayOfWeek = new Date(dateObject.getTime() - dayOfWeek * dayOffset);
-    firstDayOfWeek.setHours(1, 1, 0, 0)
-    let lastDayOfWeek = new Date(firstDayOfWeek.getTime() + 6 * dayOffset)
-    lastDayOfWeek.setHours(0, 0, 0, 0)
-    return [firstDayOfWeek, lastDayOfWeek];
-}
+// const getWeekRange = (dateObject) => {
+//     // Get weekday (0-6)
+//     const dayOfWeek = dateObject.getDay();
+//     // Offset with milliseconds * dow
+//     let firstDayOfWeek = new Date(dateObject.getTime() - dayOfWeek * dayOffset);
+//     firstDayOfWeek.setHours(1, 1, 0, 0)
+//     let lastDayOfWeek = new Date(firstDayOfWeek.getTime() + 6 * dayOffset)
+//     lastDayOfWeek.setHours(0, 0, 0, 0)
+//     return [firstDayOfWeek, lastDayOfWeek];
+// }
 const Weekly = () => {
     const classes = useStyles();
     const [state, setState] = useContext(AppContext);
@@ -48,49 +48,118 @@ const Weekly = () => {
     const [selectedWeek, setSelectedWeek] = useState(0);
     const selectRef = useRef();
 
+    // useEffect(() => {
+    //     if (state.expenses && state.expenses.length > 0) {
+    //         let maxDate = new Date();//new Date(state.expenses[0].selectedDate);
+    //         maxDate.setHours(23, 59, 59, 59);
+    //         let minDate = state.expenses[state.expenses.length - 1].selectedDate;
+    //         minDate.setHours(0, 0, 0, 0);
+    //         let weekRange = [];
+    //         let workDate = new Date(maxDate);
+    //         let range = null;
+    //         do {
+    //             range = getWeekRange(workDate);
+    //             weekRange = [...weekRange, range]
+    //             workDate = new Date(range[0].getTime() - 3 * dayOffset);
+    //         }
+    //         while (minDate < range[0])
+    //         setSelector(weekRange)
+    //         // construct week rages
+    //         getWeekSummary(weekRange[0][0], weekRange[0][1])
+    //     }
+
+    // }, []);
     useEffect(() => {
         if (state.expenses && state.expenses.length > 0) {
-            let maxDate = new Date();//new Date(state.expenses[0].selectedDate);
-            maxDate.setHours(0, 0, 0, 0);
-            let minDate = new Date(state.expenses[state.expenses.length - 1].selectedDate);
-            minDate.setHours(0, 0, 0, 0);
-
-            let weekRange = [];
-            let workDate = new Date(maxDate);
-            let range = null;
-            do {
-                range = getWeekRange(workDate);
-                weekRange = [...weekRange, range]
-                workDate = new Date(range[0].getTime() - 3 * dayOffset);
-            }
-            while (minDate < range[0])
+            let weekRange = getWeekRange();
             setSelector(weekRange)
-            // construct week rages
-            getWeekSummary(weekRange[0][0], weekRange[0][1])
+            getWeekSummary(weekRange[0])
         }
-    }, []);
+    },
+        [])
+
     const onRangeChange = (e) => {
         setSelectedWeek(e.target.value)
-        // let i = selectRef.current.selectedIndex;
-        getWeekSummary(selector[e.target.value][0], selector[e.target.value][1])
+        // let i = selectRef.current.selectedIndex; 
+        getWeekSummary(selector[e.target.value])
     }
 
-    const getWeekSummary = (minDate, maxDate) => {
-        let t = 0;
+    // const getWeekSummary = (minDate, maxDate) => {
+    //     let t = 0;
+    //     let summary = {};
+    //     state.expenses.map((x) => {
+    //         let dt = new Date(x.selectedDate)
+    //         dt.setHours(0, 0, 0, 0)
+    //         if (dt >= minDate && dt <= maxDate) {
+    //             t += parseFloat(x.amount);
+    //             let v = (summary[x.category] ? summary[x.category] : 0) + parseFloat(x.amount);
+    //             summary = { ...summary, [x.category]: v };
+    //         }
+    //     });
+    //     setTotal(t)
+    //     setSummary(Object.entries(summary));
+
+    // }
+
+
+    const getWeekRange = () => {
+        let dayOffSet = 86400000;
+        let sortedExp = state.expenses.sort((a, b) => {
+            return (new Date(b.selectedDate) - new Date(a.selectedDate))
+        })
+        let minWeek = new Date(sortedExp[sortedExp.length - 1].selectedDate).getDay();
+        let minTime = new Date(sortedExp[sortedExp.length - 1].selectedDate).getTime();
+        let maxWeek = new Date(sortedExp[0].selectedDate).getDay();
+        let maxTime = new Date(sortedExp[0].selectedDate).getTime();
+        let start;
+        let end;
+        let weekRange = [];
+
+        if (minWeek !== 0) {
+            minTime = minTime - minWeek * dayOffSet;
+        }
+
+        if (maxWeek !== 6) {
+            maxTime = maxTime + (6 - maxWeek) * dayOffSet;
+        }
+        for (let i = minTime; i < maxTime; i = i + 7 * dayOffSet) {
+            start = new Date(i).toLocaleDateString();
+            end = new Date(i + 6 * dayOffSet).toLocaleDateString();
+            weekRange = [...weekRange, [start, end]];
+        }
+        weekRange.reverse();
+        return weekRange
+    }
+
+    const getWeekSummary = (weekRange) => {
+        let sortedExp = state.expenses.sort((a, b) => {
+            return (new Date(b.selectedDate) - new Date(a.selectedDate))
+        })
+
         let summary = {};
-        state.expenses.map((x) => {
-            let dt = new Date(x.selectedDate)
-            dt.setHours(0, 0, 0, 0)
-            if (dt >= minDate && dt <= maxDate) {
-                t += parseFloat(x.amount);
-                let v = (summary[x.category] ? summary[x.category] : 0) + parseFloat(x.amount);
-                summary = { ...summary, [x.category]: v };
-            }
-        });
-        setTotal(t)
-        setSummary(Object.entries(summary));
+        let t = 0;
+ 
+            let min = new Date(weekRange[0]);
+            let max = new Date(weekRange[1]);
+            let b = sortedExp.filter((y, id) => {
+                let d = y.selectedDate;
+                return (d >= min && d <= max)
+            })
 
+            b.length > 0 && b.forEach((z, num) => {
+                if (!summary[z.category]) {
+                    summary[z.category] = parseFloat(z.amount)
+                } else {
+                    summary[z.category] += parseFloat(z.amount)
+                }
+                t += parseFloat(z.amount)
+            })      
+        setTotal(t)
+        setSummary(Object.entries(summary))
     }
+
+
+
     const getColorStyle = (category) => {
         return { background: state.color[state.categories.indexOf(category)] }
     }
@@ -104,8 +173,8 @@ const Weekly = () => {
     const colors = (category) => {
         return state.color[state.categories.indexOf(category)]
     }
-    return (
 
+    return (
         <div className={classes.style}>
             {state.expenses && state.expenses.length > 0 ?
                 <>
@@ -128,13 +197,13 @@ const Weekly = () => {
                             >
                                 {selector.map((option, i) => (
                                     <MenuItem key={i} value={i}>
-                                        {option[0].toLocaleDateString()}-{option[1].toLocaleDateString()}
+                                        {option[0]}-{option[1]}
                                     </MenuItem>
                                 ))}
                             </TextField>
                         </div>
                     </form>
-                  
+
                     {summary && summary.length > 0 ?
                         <>
                             <div className="summaryList">
@@ -149,7 +218,7 @@ const Weekly = () => {
                                 }
                                 <div className="summaryItem total"> <span className="color"></span><span>Total</span><span>${total}</span><span>100%</span></div>
                             </div>
-                         
+
                             <div className="chartDivision">
                                 <div>
                                     <PieChart width={300} height={300}>
