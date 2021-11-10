@@ -36,13 +36,8 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-
-// const initialExpenses = localStorage.getItem("spending") ?
-// JSON.parse(localStorage.getItem("spending")) : [];
-
 const Expense = () => {
     const [state, setState] = useContext(AppContext);
-
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [amount, setAmount] = useState("");
     const [payee, setPayee] = useState("");
@@ -59,7 +54,7 @@ const Expense = () => {
         }
     }, [state.index]);
 
-   
+
 
     const handleDateChange = date => {
         setSelectedDate(date);
@@ -90,25 +85,27 @@ const Expense = () => {
         e.preventDefault();
         if (amount > 0 && payee && category) {
             let singleExpense = { id: uuidv4(), selectedDate, amount, payee, category, description };
-            let tempExpenses=[]
+            let tempExpenses = []
             if (state.index > -1) {
                 tempExpenses = [...state.expenses];
                 tempExpenses[state.index] = singleExpense;
-                setState((s)=>{return{
-                    ...s, expenses: tempExpenses, currentComponentIndex: 1, index: -1,
-                    alert: { show: true, type: "success", text: "Item updated" }, activeButton: 1
-                }})
-               
+                setState((s) => {
+                    return {
+                        ...s, expenses: tempExpenses, currentComponentIndex: 1, index: -1,
+                        alert: { show: true, type: "success", text: "Item updated" }, activeButton: 1
+                    }
+                })
+
             } else {
-                tempExpenses=[singleExpense,...state.expenses ]
+                tempExpenses = [singleExpense, ...state.expenses]
                 setState((s) => {
                     return {
                         ...s, expenses: tempExpenses, currentComponentIndex: 1,
                         alert: { show: true, type: "success", text: "Item added" }, activeButton: 1
                     }
-                   
+
                 })
-               
+
             }
             setAmount("");
             setPayee("");
@@ -117,14 +114,13 @@ const Expense = () => {
             setSelectedDate(new Date());
             localStorage.setItem("spending", JSON.stringify(tempExpenses))
         } else {
-            setState((s)=>{return { ...s, alert: { show: true, type: "danger", text: "Please fill in the Amount, Payee and select category!" } }})
+            setState((s) => { return { ...s, alert: { show: true, type: "danger", text: "Please fill in the Amount, Payee and select category!" } } })
         }
-       
+
     }
     return (
-        <div className ="expenseContainer">
+        <div className="expenseContainer">
             <form className="form-center" onSubmit={handleSubmit}>
-
                 <div className="form-group">
                     {/* <label htmlFor="date">Date:</label> */}
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>

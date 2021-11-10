@@ -29,16 +29,7 @@ const useStyles = makeStyles(theme => ({
 
 const dayOffset = 86400000;
 
-// const getWeekRange = (dateObject) => {
-//     // Get weekday (0-6)
-//     const dayOfWeek = dateObject.getDay();
-//     // Offset with milliseconds * dow
-//     let firstDayOfWeek = new Date(dateObject.getTime() - dayOfWeek * dayOffset);
-//     firstDayOfWeek.setHours(1, 1, 0, 0)
-//     let lastDayOfWeek = new Date(firstDayOfWeek.getTime() + 6 * dayOffset)
-//     lastDayOfWeek.setHours(0, 0, 0, 0)
-//     return [firstDayOfWeek, lastDayOfWeek];
-// }
+
 const Weekly = () => {
     const classes = useStyles();
     const [state, setState] = useContext(AppContext);
@@ -48,27 +39,7 @@ const Weekly = () => {
     const [selectedWeek, setSelectedWeek] = useState(0);
     const selectRef = useRef();
 
-    // useEffect(() => {
-    //     if (state.expenses && state.expenses.length > 0) {
-    //         let maxDate = new Date();//new Date(state.expenses[0].selectedDate);
-    //         maxDate.setHours(23, 59, 59, 59);
-    //         let minDate = state.expenses[state.expenses.length - 1].selectedDate;
-    //         minDate.setHours(0, 0, 0, 0);
-    //         let weekRange = [];
-    //         let workDate = new Date(maxDate);
-    //         let range = null;
-    //         do {
-    //             range = getWeekRange(workDate);
-    //             weekRange = [...weekRange, range]
-    //             workDate = new Date(range[0].getTime() - 3 * dayOffset);
-    //         }
-    //         while (minDate < range[0])
-    //         setSelector(weekRange)
-    //         // construct week rages
-    //         getWeekSummary(weekRange[0][0], weekRange[0][1])
-    //     }
-
-    // }, []);
+   
     useEffect(() => {
         if (state.expenses && state.expenses.length > 0) {
             let weekRange = getWeekRange();
@@ -83,24 +54,6 @@ const Weekly = () => {
         // let i = selectRef.current.selectedIndex; 
         getWeekSummary(selector[e.target.value])
     }
-
-    // const getWeekSummary = (minDate, maxDate) => {
-    //     let t = 0;
-    //     let summary = {};
-    //     state.expenses.map((x) => {
-    //         let dt = new Date(x.selectedDate)
-    //         dt.setHours(0, 0, 0, 0)
-    //         if (dt >= minDate && dt <= maxDate) {
-    //             t += parseFloat(x.amount);
-    //             let v = (summary[x.category] ? summary[x.category] : 0) + parseFloat(x.amount);
-    //             summary = { ...summary, [x.category]: v };
-    //         }
-    //     });
-    //     setTotal(t)
-    //     setSummary(Object.entries(summary));
-
-    // }
-
 
     const getWeekRange = () => {
         let dayOffSet = 86400000;

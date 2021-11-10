@@ -131,19 +131,7 @@ const Yearly = () => {
                         </div>
                     </form>
 
-                    {/* <div className="box">
-                        {year &&
-                            <select className="select" ref={selectRef} onChange={handleYearChange}>
-                                {year.map((item, index) => {
-                                    return (
-                                        <option key={index}>
-                                            {item}
-                                        </option>
-                                    )
-                                })}
-                            </select>
-                        }
-                    </div> */}
+                   
                     {yearSummary && yearSummary.length > 0 ?
                         <>
                             <div className="summaryList">

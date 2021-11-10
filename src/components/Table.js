@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { AppContext } from "../AppContext";
 import { MdArrowDownward, MdArrowUpward, MdEdit, MdDelete } from "react-icons/md";
-import { makePickerWithState } from '@material-ui/pickers';
+
 
 const rowArr = [5, 10, 20];
 
@@ -13,17 +13,14 @@ const Table = () => {
     const [isDateDescent, setIsDateDescent] = useState(true);
     const [rowIndex, setRowIndex] = useState(5);
     const [pageIndex, setpageIndex] = useState(1);
-    // const [page, setpage] = useState(1);
+   
 
     const getActitivityDescending = (col) => {
-
         state.expenses.sort((a, b) => {
-
             switch (col) {
                 case 1:
                     if (isCatDescend) {
                         return b.category > a.category ? 1 : -1
-
                     } else {
                         return b.category > a.category ? -1 : 1
                     }
@@ -84,8 +81,6 @@ const Table = () => {
             let i = e.target.value;
             setRowIndex(i)
             setpageIndex(1)
-            // setpage(1)
-
         }
     }
     const handlePrevious = () => {
@@ -101,7 +96,6 @@ const Table = () => {
     }
 
     const handleEdit = (index) => {
-
         setState(s => {
             return {
                 ...s, index,
@@ -113,7 +107,6 @@ const Table = () => {
 
     return (
         <div className="wholeTableContainer">
-
             <div className="displayContainer toptitle forActivity">
                 <div className="sortTitle" onClick={handleDateClick}><span className="adIcon">
                     {isDateDescent ? <MdArrowDownward /> : <MdArrowUpward />}
@@ -133,9 +126,7 @@ const Table = () => {
                         {isCatDescend ? <MdArrowDownward /> : <MdArrowUpward />}
                     </span>Cat.
                 </div>
-                <div className="sortTitle des"
-                // onClick={handleExpPerClick}
-                >
+                <div className="sortTitle des">
                     Des.
                 </div>
                 <div className="sortTitle">
@@ -155,7 +146,7 @@ const Table = () => {
                             <div className="des">{x.description}</div>
                             <div><span className="editButton" onClick={() => { handleEdit(index) }}><MdEdit /></span>
                                 <span className="deleteButton"
-                                    onClick={() => handleDelete(index)}><MdDelete /></span> </div>
+                                    onClick={() => handleDelete(x.id)}><MdDelete /></span> </div>
                         </div>
                     )
                 })}
@@ -177,7 +168,6 @@ const Table = () => {
                     <button className={pageIndex !== Math.ceil(state.expenses.length / rowIndex) ? "tablebtn" : "tablebtn disableBtn"} onClick={handleNext}>Next</button>
                 </div>
             </div>
-
         </div>)
 
 }

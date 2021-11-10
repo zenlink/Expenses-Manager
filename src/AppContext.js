@@ -2,7 +2,7 @@ import React, { useState, createContext } from 'react';
 import Expense from './components/Expense';
 import Summary from './components/Summary';
 import Activity from './components/Activity';
-import Chart from './components/Chart';
+
 
 
 const AppContext = createContext([{}, () => { }]);

@@ -10,10 +10,7 @@ body{
   background: #F5F5F5;
   font-family: "Roboto", Arial, Helvetica, sans-serif
 }
-.container{
 
-  /* margin-top: 4.3rem; */
-}
 /* nav */
 
 .navHead{
@@ -69,8 +66,7 @@ align-self: center;
     padding: 0 .5rem;
     font-size: 1rem;
     }
-    .label{
-     
+    .label{     
       padding: 0 .5rem;
     font-size: 1rem;
     
@@ -158,81 +154,33 @@ align-self: center;
   .form-center{
     width: 370px;
   }
-
-
 }
 /* end of expenses */
 
 /* activity */
-.activities{
- margin:0 auto;
- max-width: 1280px;
- /* width: 90%; */
- padding-bottom: 2rem;
- border-radius: 2px;
-}
-.noActivity{
-  text-transform: uppercase;
-  font-size: 25px;
-  color: green;
-  text-align: center;
-}
-.list{
-  margin: 2rem 0.75rem 0 0.75rem;
-  list-style-type: none;
-  border: none;
-  padding: 0;
-}
-.item{
-  background-color: white;
-  line-height: 1.5rem;
-  padding: 10px 20px;
-  /* margin-bottom: .05rem; */
-  border: 1px solid #e0e0e0;
-  /* display: flex;
-  justify-content: space-between; */
-  display: grid;
-  grid-template-columns: 25% 17% 18% 18% 10% 6% 9%;
-  transition: all 0.3s linear;
-  border-radius: 2px;
-}
-.actTitle{
-  background-color: #52bcb2;
-  color: white;
-  text-transform: uppercase;
-}
+
 .deleteButton{
   cursor: pointer;
   color: #d50000;
-  font-size: 24px;
+  font-size: 24px; 
+  margin-left: 4px;
 }
 .editButton{
   cursor: pointer;
   color: green;
   font-size: 24px;
+  margin-right: 4px;
 }
-.deleteAll{
-  margin-top: 1rem;
-  background-color: #d50000;
-}
+
 @media screen and (max-width: 768px){
-  .activities{
-    width: 100%;
-    font-size: 13px;
-  }
-  .list{
-    margin: 2rem 0 0 0;
-  }
-  .item{
-    padding: 10px 5px;
-  }
+  
   .deleteButton{
     font-size: 16px;
-    text-align: left;
+    
   }
   .editButton{
     font-size: 16px;
-    text-align: left;
+    
   }
 }
 /* end of activity */
@@ -271,20 +219,7 @@ align-self: center;
   padding:0 10px;
   font-size: 16px;
  }
-  /* .timeContainer{
-    display: none;  
-    position: absolute;
-    left: 0;
-    width: 30%;
-    min-width: 120px;
-    background: rgba(151,151,151, 0.7);
-    z-index:1; 
-  } */
-  /* .showNavTime{
-    display: flex;
-    flex-direction: column;
-    align-items: center;   
-  } */
+ 
 }
 .currentSummary{
     background-color: F5F5F5;
@@ -299,9 +234,7 @@ align-self: center;
 }
 
 
-/* .option{
-  padding: 100px;
-} */
+
 .sumaryList{
   /* margin: 0 auto;
   border: none;
@@ -373,7 +306,7 @@ align-self: center;
 }
 /* end of summary */
 
-/* Summary-table */
+/* activity-table */
 .wholeTableContainer{
   box-shadow: 0px 5px 2px #aaaaaa;
 }
@@ -463,7 +396,7 @@ align-self: center;
     font-size: 1rem;
   }
 }
-/* End of Summary-table */
+/* End of activity-table */
 
 /* Summary-select */
 .boxContainer{
